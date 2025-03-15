@@ -1,0 +1,32 @@
+{
+  "family": "monolithic-task",
+  "networkMode": "awsvpc",
+  "executionRoleArn": "arn:aws:iam::442426883439:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "monolithic-container",
+      "image": "442426883439.dkr.ecr.us-east-1.amazonaws.com/monolithic-app:latest",
+      "memory": 512,
+      "cpu": 256,
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "hostPort": 5000,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/monolithic-task",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "requiresCompatibilities": ["FARGATE"],
+  "memory": "512",
+  "cpu": "256"
+}
